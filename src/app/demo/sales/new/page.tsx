@@ -393,23 +393,23 @@ export default function DemoPosPage() {
                     <Card
                       key={product.id}
                       className={cn(
-                        "relative flex flex-col justify-between border transition-all duration-150 rounded-xl overflow-hidden text-left",
+                        "relative flex flex-col justify-between border transition-all duration-150 rounded-xl overflow-hidden text-left tile-touch",
                         isDisabled
-                          ? "bg-[#F9F8FA] border-[#E7E3EC] opacity-65"
+                          ? "bg-[#FAF9FB] border-[#E5E1EC] opacity-65"
                           : inCartQty > 0
                           ? "border-[#5B3CC4] bg-[#FDFDFF] shadow-xs"
-                          : "border-[#E7E3EC] hover:border-[#5B3CC4] hover:shadow-xs bg-white"
+                          : "border-[#E5E1EC] hover:border-[#5B3CC4]/60 hover:shadow-xs bg-white"
                       )}
                     >
                       <CardContent className="p-4 flex flex-col justify-between h-full space-y-3">
                         <div className="space-y-1.5">
                           {/* Kategori & Status Stok */}
                           <div className="flex items-center justify-between gap-1 text-[11px]">
-                            <span className="text-[#716D7A] font-medium truncate max-w-[120px]">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#767182] block truncate max-w-[120px]">
                               {product.category}
                             </span>
                             {isArchived ? (
-                              <Badge variant="outline" className="text-[10px] text-[#716D7A]">
+                              <Badge variant="outline" className="text-[10px] text-[#767182]">
                                 Diarsipkan
                               </Badge>
                             ) : isOutOfStock ? (
@@ -421,8 +421,9 @@ export default function DemoPosPage() {
                                 Sisa {product.stockQuantity} {product.unit}
                               </Badge>
                             ) : (
-                              <span className="text-[#716D7A] font-medium text-[10px]">
-                                Stok: {product.stockQuantity} {product.unit}
+                              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#EBF8F2] text-[#0D894F] border border-[#A6E7C7] shrink-0">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#0D894F]" />
+                                <span>Stok: {product.stockQuantity}</span>
                               </span>
                             )}
                           </div>
@@ -430,12 +431,12 @@ export default function DemoPosPage() {
                           {/* Nama Produk & SKU */}
                           <div>
                             <h4
-                              className="font-bold text-[#25232B] text-sm leading-snug line-clamp-2"
+                              className="font-bold text-[#1A1820] text-sm leading-snug line-clamp-2"
                               title={product.name}
                             >
                               {product.name}
                             </h4>
-                            <p className="text-[11px] font-mono text-[#716D7A] mt-0.5">
+                            <p className="text-[11px] font-mono text-[#767182] mt-0.5">
                               {product.sku}
                             </p>
                           </div>
@@ -444,8 +445,8 @@ export default function DemoPosPage() {
                         {/* Harga & Tombol Tambah ke Keranjang */}
                         <div className="pt-2 border-t border-[#F0EDF5] flex items-center justify-between gap-2">
                           <div>
-                            <span className="text-xs text-[#716D7A] block leading-none">Harga</span>
-                            <span className="text-base font-bold text-[#25232B] font-mono tabular-nums">
+                            <span className="text-[10px] text-[#767182] block leading-none uppercase font-semibold">Harga</span>
+                            <span className="text-base font-bold text-[#1A1820] font-mono tabular-nums">
                               {formatRupiah(product.price)}
                             </span>
                           </div>
@@ -496,18 +497,18 @@ export default function DemoPosPage() {
               state.activeMobileTab === "CATALOG" ? "hidden lg:block" : "block"
             )}
           >
-            <Card className="border-[#E7E3EC] shadow-sm sticky top-4">
+            <Card className="border border-[#E5E1EC] bg-white shadow-xs rounded-xl overflow-hidden sticky top-4">
               {/* Header Keranjang */}
-              <CardHeader className="p-4 sm:p-5 pb-3 border-b border-[#E7E3EC] flex flex-row items-center justify-between space-y-0">
+              <CardHeader className="p-4 sm:p-5 pb-3 bg-[#FAF9F6] border-b border-[#E5E1EC] flex flex-row items-center justify-between space-y-0">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#F6F3FF] text-[#5B3CC4] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-[#F4F0FD] text-[#5B3CC4] flex items-center justify-center border border-[#E7E0FA]">
                     <ShoppingCart className="w-4 h-4" aria-hidden="true" />
                   </div>
                   <div>
-                    <CardTitle className="text-base font-bold text-[#25232B]">
+                    <CardTitle className="text-sm sm:text-base font-bold text-[#1A1820]">
                       Keranjang Kasir
                     </CardTitle>
-                    <p className="text-xs text-[#716D7A]">
+                    <p className="text-xs text-[#767182]">
                       {summary.itemsCount} total item ({state.cart.length} produk)
                     </p>
                   </div>
@@ -519,7 +520,7 @@ export default function DemoPosPage() {
                     variant="ghost"
                     size="sm"
                     onClick={() => dispatch({ type: "CLEAR_CART" })}
-                    className="text-xs text-[#C0392B] hover:text-[#922B21] hover:bg-[#FDEDEC] h-8 px-2"
+                    className="text-xs font-semibold text-[#C0392B] hover:text-[#922B21] hover:bg-[#FDEDEC] h-8 px-2"
                   >
                     <Trash2 className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
                     Kosongkan
@@ -531,14 +532,14 @@ export default function DemoPosPage() {
                 {/* Daftar Item Keranjang */}
                 {state.cart.length === 0 ? (
                   <div className="py-10 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-full bg-[#F6F3FF] text-[#5B3CC4] mx-auto flex items-center justify-center">
-                      <ShoppingCart className="w-6 h-6 opacity-70" aria-hidden="true" />
+                    <div className="w-12 h-12 rounded-full bg-[#FAF9F6] border border-[#E5E1EC] text-[#767182] mx-auto flex items-center justify-center">
+                      <ShoppingCart className="w-5 h-5 opacity-40" aria-hidden="true" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#25232B]">
+                      <h4 className="text-sm font-bold text-[#1A1820]">
                         Keranjang Belanja Kosong
                       </h4>
-                      <p className="text-xs text-[#716D7A] max-w-[240px] mx-auto mt-1">
+                      <p className="text-xs text-[#767182] max-w-[240px] mx-auto mt-1">
                         Pilih produk dari katalog di sebelah kiri untuk memulai transaksi baru.
                       </p>
                     </div>
@@ -565,15 +566,15 @@ export default function DemoPosPage() {
                       return (
                         <div
                           key={item.productId}
-                          className="p-3 rounded-lg border border-[#E7E3EC] bg-white hover:border-[#D5CFE0] transition-colors space-y-2.5"
+                          className="p-3 rounded-lg border border-[#E5E1EC] bg-[#FAF9F6]/80 hover:border-[#D5CFE0] transition-colors space-y-2.5"
                         >
                           {/* Nama Produk & Tombol Hapus */}
                           <div className="flex items-start justify-between gap-2">
                             <div className="min-w-0">
-                              <h5 className="text-xs font-bold text-[#25232B] truncate leading-tight">
+                              <h5 className="text-xs font-bold text-[#1A1820] truncate leading-tight">
                                 {item.name}
                               </h5>
-                              <p className="text-[11px] text-[#716D7A] font-mono mt-0.5">
+                              <p className="text-[11px] text-[#767182] font-mono mt-0.5">
                                 {formatRupiah(item.unitPrice)} / {item.unit}
                               </p>
                               {item.quantity > currentStock && (
@@ -588,7 +589,7 @@ export default function DemoPosPage() {
                               onClick={() =>
                                 dispatch({ type: "REMOVE_ITEM", productId: item.productId })
                               }
-                              className="text-[#716D7A] hover:text-[#C0392B] p-1 -mr-1 rounded hover:bg-[#FDEDEC] transition-colors cursor-pointer"
+                              className="text-[#767182] hover:text-[#C0392B] p-1 -mr-1 rounded hover:bg-white transition-colors cursor-pointer"
                               aria-label={`Hapus ${item.name} dari keranjang`}
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -598,7 +599,7 @@ export default function DemoPosPage() {
                           {/* Stepper Kuantitas & Subtotal Baris */}
                           <div className="flex items-center justify-between gap-2 pt-1 border-t border-[#F0EDF5]">
                             {/* Stepper Qty */}
-                            <div className="flex items-center border border-[#E7E3EC] rounded-md overflow-hidden bg-[#FAF9F6]">
+                            <div className="flex items-center border border-[#E5E1EC] rounded-lg overflow-hidden bg-white shadow-2xs">
                               <button
                                 type="button"
                                 disabled={item.quantity <= 1}
@@ -609,7 +610,7 @@ export default function DemoPosPage() {
                                     quantity: item.quantity - 1,
                                   })
                                 }
-                                className="w-8 h-8 flex items-center justify-center text-[#25232B] hover:bg-[#EAE4FF] disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
+                                className="w-8 h-8 flex items-center justify-center text-[#1A1820] hover:bg-[#F4F0FD] hover:text-[#5B3CC4] active:scale-95 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
                                 aria-label="Kurangi kuantitas"
                               >
                                 <Minus className="w-3 h-3" />
@@ -629,7 +630,7 @@ export default function DemoPosPage() {
                                     });
                                   }
                                 }}
-                                className="w-11 h-8 text-center text-xs font-bold font-mono bg-white text-[#25232B] border-x border-[#E7E3EC] focus:outline-none"
+                                className="w-11 h-8 text-center text-xs font-bold font-mono bg-white text-[#1A1820] border-x border-[#E5E1EC] focus:outline-none"
                                 aria-label={`Kuantitas ${item.name}`}
                               />
                               <button
@@ -642,7 +643,7 @@ export default function DemoPosPage() {
                                     quantity: item.quantity + 1,
                                   })
                                 }
-                                className="w-8 h-8 flex items-center justify-center text-[#25232B] hover:bg-[#EAE4FF] disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
+                                className="w-8 h-8 flex items-center justify-center text-[#1A1820] hover:bg-[#F4F0FD] hover:text-[#5B3CC4] active:scale-95 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
                                 aria-label="Tambah kuantitas"
                               >
                                 <Plus className="w-3 h-3" />
@@ -651,11 +652,11 @@ export default function DemoPosPage() {
 
                             {/* Subtotal Baris */}
                             <div className="text-right">
-                              <span className="text-xs font-bold text-[#25232B] font-mono tabular-nums block">
+                              <span className="text-xs font-bold text-[#1A1820] font-mono tabular-nums block">
                                 {formatRupiah(lineSubtotal)}
                               </span>
                               {item.itemDiscount > 0 && (
-                                <span className="text-[10px] text-[#1E824C] font-mono block">
+                                <span className="text-[10px] text-[#0D894F] font-mono block">
                                   Hemat {formatRupiah(item.itemDiscount)}
                                 </span>
                               )}
@@ -663,7 +664,7 @@ export default function DemoPosPage() {
                           </div>
 
                           {/* Tombol Toggle Diskon Item */}
-                          <div className="pt-1">
+                          <div className="pt-0.5">
                             <button
                               type="button"
                               onClick={() =>
@@ -683,10 +684,10 @@ export default function DemoPosPage() {
 
                             {/* Input Diskon Item (bisa disembunyikan/ditampilkan) */}
                             {isDiscountOpen && (
-                              <div className="mt-2 p-2 rounded bg-[#F6F3FF] border border-[#EAE4FF] flex items-center gap-2">
+                              <div className="mt-2 p-2 rounded-lg bg-white border border-[#E5E1EC] flex items-center gap-2">
                                 <label
                                   htmlFor={`discount-${item.productId}`}
-                                  className="text-[11px] font-semibold text-[#392477] shrink-0"
+                                  className="text-[11px] font-semibold text-[#1A1820] shrink-0"
                                 >
                                   Diskon (Rp):
                                 </label>
@@ -706,12 +707,12 @@ export default function DemoPosPage() {
                                       discount: isNaN(val) ? 0 : val,
                                     });
                                   }}
-                                  className="w-full text-xs px-2 py-1 bg-white border border-[#E7E3EC] rounded font-mono text-[#25232B] focus:outline-none focus:ring-1 focus:ring-[#5B3CC4]"
+                                  className="w-full text-xs px-2 py-1 bg-white border border-[#E5E1EC] rounded font-mono text-[#1A1820] focus:outline-none focus:ring-1 focus:ring-[#5B3CC4]"
                                 />
                                 <button
                                   type="button"
                                   onClick={() => setActiveItemDiscountId(null)}
-                                  className="text-xs text-[#716D7A] hover:text-[#25232B] px-1"
+                                  className="text-xs text-[#767182] hover:text-[#1A1820] px-1"
                                 >
                                   Tutup
                                 </button>
@@ -726,18 +727,18 @@ export default function DemoPosPage() {
 
                 {/* Seksi Ringkasan Finansial & Diskon Transaksi (Hanya jika ada item) */}
                 {state.cart.length > 0 && (
-                  <div className="pt-4 border-t border-[#E7E3EC] space-y-3">
+                  <div className="pt-4 border-t border-[#E5E1EC] space-y-3">
                     {/* Diskon Transaksi Global */}
                     <div className="space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <label
                           htmlFor="transaction-discount-input"
-                          className="font-semibold text-[#25232B] flex items-center gap-1"
+                          className="font-semibold text-[#1A1820] flex items-center gap-1"
                         >
                           <Tag className="w-3.5 h-3.5 text-[#5B3CC4]" />
                           <span>Diskon Transaksi (Rp)</span>
                         </label>
-                        <span className="text-[11px] text-[#716D7A]">
+                        <span className="text-[11px] text-[#767182]">
                           Maks: {formatRupiah(summary.grossSubtotal)}
                         </span>
                       </div>
@@ -756,19 +757,19 @@ export default function DemoPosPage() {
                             discount: isNaN(val) ? 0 : val,
                           });
                         }}
-                        className="w-full text-xs px-3 py-2 bg-white border border-[#E7E3EC] rounded-md font-mono text-[#25232B] focus:outline-none focus:ring-2 focus:ring-[#5B3CC4]"
+                        className="w-full text-xs px-3 py-2 bg-white border border-[#E5E1EC] rounded-md font-mono text-[#1A1820] focus:outline-none focus:ring-2 focus:ring-[#5B3CC4]"
                       />
                     </div>
 
                     {/* Breakdown Rincian Finansial */}
-                    <div className="p-3 rounded-lg bg-[#FAF9F6] border border-[#E7E3EC] space-y-1.5 text-xs">
-                      <div className="flex justify-between text-[#716D7A]">
+                    <div className="p-3.5 rounded-xl bg-[#FAF9F6] border border-[#E5E1EC] space-y-2 text-xs">
+                      <div className="flex justify-between text-[#767182]">
                         <span>Subtotal Kotor</span>
                         <span className="font-mono">{formatRupiah(summary.grossTotal)}</span>
                       </div>
 
                       {summary.itemDiscountsTotal > 0 && (
-                        <div className="flex justify-between text-[#1E824C]">
+                        <div className="flex justify-between text-[#0D894F]">
                           <span>Diskon Item</span>
                           <span className="font-mono">
                             -{formatRupiah(summary.itemDiscountsTotal)}
@@ -777,7 +778,7 @@ export default function DemoPosPage() {
                       )}
 
                       {summary.transactionDiscount > 0 && (
-                        <div className="flex justify-between text-[#1E824C]">
+                        <div className="flex justify-between text-[#0D894F]">
                           <span>Diskon Transaksi</span>
                           <span className="font-mono">
                             -{formatRupiah(summary.transactionDiscount)}
@@ -785,9 +786,9 @@ export default function DemoPosPage() {
                         </div>
                       )}
 
-                      <div className="pt-2 border-t border-[#E7E3EC] flex justify-between items-baseline font-bold text-sm text-[#25232B]">
+                      <div className="pt-2 border-t border-[#E5E1EC] flex justify-between items-baseline font-bold text-sm text-[#1A1820]">
                         <span>Total Tagihan</span>
-                        <span className="text-lg text-[#5B3CC4] font-mono tabular-nums">
+                        <span className="text-xl text-[#5B3CC4] font-mono tabular-nums">
                           {formatRupiah(summary.totalAmount)}
                         </span>
                       </div>
@@ -795,7 +796,7 @@ export default function DemoPosPage() {
 
                     {/* Pemilihan Metode Pembayaran */}
                     <div className="space-y-1.5 pt-1">
-                      <label className="block text-xs font-semibold text-[#25232B]">
+                      <label className="block text-xs font-semibold text-[#1A1820]">
                         Metode Pembayaran
                       </label>
                       <div className="grid grid-cols-2 gap-2">
@@ -805,10 +806,10 @@ export default function DemoPosPage() {
                             dispatch({ type: "SET_PAYMENT_METHOD", method: "CASH" })
                           }
                           className={cn(
-                            "py-2 px-3 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition-colors min-h-[44px] cursor-pointer",
+                            "py-2.5 px-3 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition-all min-h-[44px] cursor-pointer active:scale-[0.98]",
                             state.paymentMethod === "CASH"
-                              ? "bg-[#F6F3FF] border-[#5B3CC4] text-[#5B3CC4]"
-                              : "bg-white border-[#E7E3EC] text-[#716D7A] hover:bg-[#FAF9F6]"
+                              ? "bg-[#F4F0FD] border-[#5B3CC4] text-[#5B3CC4] ring-1 ring-[#5B3CC4]/20 shadow-2xs"
+                              : "bg-white border-[#E5E1EC] text-[#767182] hover:bg-[#FAF9F6] hover:text-[#1A1820]"
                           )}
                           aria-pressed={state.paymentMethod === "CASH"}
                         >
@@ -822,10 +823,10 @@ export default function DemoPosPage() {
                             dispatch({ type: "SET_PAYMENT_METHOD", method: "BANK_TRANSFER" })
                           }
                           className={cn(
-                            "py-2 px-3 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition-colors min-h-[44px] cursor-pointer",
+                            "py-2.5 px-3 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition-all min-h-[44px] cursor-pointer active:scale-[0.98]",
                             state.paymentMethod === "BANK_TRANSFER"
-                              ? "bg-[#F6F3FF] border-[#5B3CC4] text-[#5B3CC4]"
-                              : "bg-white border-[#E7E3EC] text-[#716D7A] hover:bg-[#FAF9F6]"
+                              ? "bg-[#F4F0FD] border-[#5B3CC4] text-[#5B3CC4] ring-1 ring-[#5B3CC4]/20 shadow-2xs"
+                              : "bg-white border-[#E5E1EC] text-[#767182] hover:bg-[#FAF9F6] hover:text-[#1A1820]"
                           )}
                           aria-pressed={state.paymentMethod === "BANK_TRANSFER"}
                         >
@@ -837,11 +838,11 @@ export default function DemoPosPage() {
 
                     {/* Khusus Pembayaran TUNAI: Input Uang Diterima & Tombol Cepat */}
                     {state.paymentMethod === "CASH" && (
-                      <div className="p-3 rounded-lg bg-[#FAF9F6] border border-[#E7E3EC] space-y-2.5 animate-in fade-in">
+                      <div className="p-3.5 rounded-xl bg-[#FAF9F6] border border-[#E5E1EC] space-y-2.5 animate-in fade-in">
                         <div className="space-y-1">
                           <label
                             htmlFor="cash-received-input"
-                            className="block text-xs font-semibold text-[#25232B]"
+                            className="block text-xs font-semibold text-[#1A1820]"
                           >
                             Uang Tunai Diterima (Rp)
                           </label>
@@ -863,7 +864,7 @@ export default function DemoPosPage() {
                               "w-full text-sm font-bold font-mono px-3 py-2 bg-white border rounded-md focus:outline-none focus:ring-2",
                               !summary.isCashSufficient && state.cashReceived > 0
                                 ? "border-[#C0392B] focus:ring-[#C0392B]"
-                                : "border-[#E7E3EC] focus:ring-[#5B3CC4]"
+                                : "border-[#E5E1EC] focus:ring-[#5B3CC4]"
                             )}
                           />
                         </div>
@@ -878,10 +879,10 @@ export default function DemoPosPage() {
                                 dispatch({ type: "SET_CASH_RECEIVED", amount: opt })
                               }
                               className={cn(
-                                "text-[11px] px-2 py-1 rounded font-mono font-medium border transition-colors cursor-pointer",
+                                "text-[11px] px-2.5 py-1 rounded-md font-mono font-semibold border transition-all cursor-pointer shadow-2xs active:scale-95",
                                 state.cashReceived === opt
                                   ? "bg-[#5B3CC4] text-white border-[#5B3CC4]"
-                                  : "bg-white text-[#25232B] border-[#E7E3EC] hover:bg-[#F0EDF5]"
+                                  : "bg-white text-[#1A1820] border-[#E5E1EC] hover:bg-[#F4F0FD] hover:border-[#5B3CC4] hover:text-[#5B3CC4]"
                               )}
                             >
                               {opt === summary.totalAmount ? "Uang Pas" : formatRupiah(opt)}
@@ -890,20 +891,20 @@ export default function DemoPosPage() {
                         </div>
 
                         {/* Tampilan Kembalian / Uang Kurang */}
-                        <div className="pt-2 border-t border-[#E7E3EC]">
+                        <div className="pt-2 border-t border-[#E5E1EC]">
                           {state.cashReceived === 0 ? (
-                            <p className="text-[11px] text-[#716D7A]">
+                            <p className="text-[11px] text-[#767182]">
                               Masukkan nominal uang tunai yang diserahkan pelanggan.
                             </p>
                           ) : summary.isCashSufficient ? (
-                            <div className="flex justify-between items-center text-xs text-[#0E6251] bg-[#E8F8F0] p-2 rounded border border-[#A3E4D7]">
+                            <div className="flex justify-between items-center text-xs text-[#0D894F] bg-[#EBF8F2] p-2.5 rounded-lg border border-[#A6E7C7]">
                               <span className="font-semibold">Kembalian:</span>
                               <span className="font-bold text-sm font-mono tabular-nums">
                                 {formatRupiah(summary.cashChange)}
                               </span>
                             </div>
                           ) : (
-                            <div className="flex justify-between items-center text-xs text-[#922B21] bg-[#FDEDEC] p-2 rounded border border-[#F5B7B1]">
+                            <div className="flex justify-between items-center text-xs text-[#C0392B] bg-[#FDF2F1] p-2.5 rounded-lg border border-[#F8C8C4]">
                               <span className="font-semibold">Uang Kurang:</span>
                               <span className="font-bold font-mono tabular-nums">
                                 {formatRupiah(summary.cashShortfall)}
@@ -916,9 +917,9 @@ export default function DemoPosPage() {
 
                     {/* Khusus Pembayaran TRANSFER BANK: Keterangan Lunas Otomatis */}
                     {state.paymentMethod === "BANK_TRANSFER" && (
-                      <div className="p-3 rounded-lg bg-[#EBF5FB] border border-[#AED6F1] text-[#1B4F72] text-xs space-y-1 animate-in fade-in">
+                      <div className="p-3.5 rounded-xl bg-[#F4F0FD] border border-[#E7E0FA] text-[#392477] text-xs space-y-1 animate-in fade-in">
                         <div className="flex items-center gap-1.5 font-semibold">
-                          <Building2 className="w-4 h-4 shrink-0 text-[#2980B9]" />
+                          <Building2 className="w-4 h-4 shrink-0 text-[#5B3CC4]" />
                           <span>Transfer Bank (Simulasi)</span>
                         </div>
                         <p className="text-[11px] opacity-90 leading-relaxed">
@@ -932,7 +933,7 @@ export default function DemoPosPage() {
                     <div className="space-y-1">
                       <label
                         htmlFor="pos-notes-input"
-                        className="block text-xs font-semibold text-[#25232B]"
+                        className="block text-xs font-semibold text-[#1A1820]"
                       >
                         Catatan Transaksi (Opsional)
                       </label>
@@ -944,7 +945,7 @@ export default function DemoPosPage() {
                         onChange={(e) =>
                           dispatch({ type: "SET_NOTES", notes: e.target.value })
                         }
-                        className="w-full text-xs px-3 py-2 bg-white border border-[#E7E3EC] rounded-md text-[#25232B] focus:outline-none focus:ring-2 focus:ring-[#5B3CC4]"
+                        className="w-full text-xs px-3 py-2 bg-white border border-[#E5E1EC] rounded-md text-[#1A1820] focus:outline-none focus:ring-2 focus:ring-[#5B3CC4]"
                       />
                     </div>
 
@@ -955,7 +956,7 @@ export default function DemoPosPage() {
                         id="process-checkout-button"
                         variant="primary"
                         size="lg"
-                        className="w-full font-bold shadow-md h-12"
+                        className="w-full font-bold shadow-sm h-12 text-sm"
                         disabled={!summary.canCheckout || state.isSubmitting}
                         isLoading={state.isSubmitting}
                         onClick={() => dispatch({ type: "OPEN_CONFIRM" })}

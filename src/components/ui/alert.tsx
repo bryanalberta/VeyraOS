@@ -36,7 +36,7 @@ export function Alert({
     <div
       role={role}
       className={cn(
-        "flex gap-3 p-3.5 sm:p-4 rounded-lg border text-sm leading-relaxed",
+        "flex gap-3 p-3.5 sm:p-4 rounded-xl border text-sm leading-relaxed shadow-2xs",
         variantStyles[variant],
         className
       )}

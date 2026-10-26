@@ -57,12 +57,12 @@ export function DemoLayout({
         {/* Main Content Area (offset by 256px on lg screens) */}
         <div className="flex-1 flex flex-col lg:pl-64 min-w-0">
           {/* Demo Top Bar */}
-          <header className="h-16 px-4 sm:px-6 bg-white border-b border-[#E7E3EC] flex items-center justify-between shrink-0">
+          <header className="h-16 px-4 sm:px-6 bg-white/95 backdrop-blur-md border-b border-[#E5E1EC] sticky top-0 z-20 flex items-center justify-between shrink-0 shadow-2xs">
             <div className="flex items-center gap-3 min-w-0">
               <button
                 type="button"
                 onClick={toggleMobileMenu}
-                className="p-2 -ml-2 rounded-lg text-[#716D7A] hover:bg-[#F0EDF5] hover:text-[#25232B] lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3CC4] min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="p-2 -ml-2 rounded-xl text-[#767182] hover:bg-[#F4F0FD] hover:text-[#5B3CC4] lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3CC4] min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer transition-colors"
                 aria-label="Buka menu navigasi demo"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -70,10 +70,14 @@ export function DemoLayout({
               </button>
 
               <div className="flex items-center gap-2 truncate">
-                <h1 className="text-base sm:text-lg font-bold text-[#25232B] tracking-tight truncate">
+                <span className="text-[11px] font-medium text-[#767182] hidden sm:inline select-none">
+                  Simulasi
+                </span>
+                <span className="text-[#C4BFCB] hidden sm:inline select-none">/</span>
+                <h1 className="text-sm sm:text-base font-bold text-[#1A1820] tracking-tight truncate">
                   {title}
                 </h1>
-                <Badge variant="demo" className="text-[10px] hidden sm:inline-flex shrink-0">
+                <Badge variant="demo" className="text-[9px] hidden sm:inline-flex shrink-0">
                   Simulasi
                 </Badge>
               </div>
@@ -99,7 +103,7 @@ export function DemoLayout({
                   type="button"
                   size="sm"
                   variant="primary"
-                  className="text-xs h-8 px-3"
+                  className="text-xs h-8 px-3.5"
                   id="topbar-demo-register-btn"
                 >
                   <Sparkles className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
@@ -113,6 +117,7 @@ export function DemoLayout({
           <main
             id="demo-main-content"
             tabIndex={-1}
+            suppressHydrationWarning
             className={cn(
               "flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto pb-24 lg:pb-8 focus:outline-none",
               className

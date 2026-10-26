@@ -30,6 +30,30 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Pengaturan", href: "/settings", icon: Settings },
 ];
 
+export interface NavGroup {
+  title: string;
+  items: NavItem[];
+}
+
+export const NAV_GROUPS: NavGroup[] = [
+  {
+    title: "Utama",
+    items: [NAV_ITEMS[0]],
+  },
+  {
+    title: "Operasional",
+    items: [NAV_ITEMS[1], NAV_ITEMS[2], NAV_ITEMS[4]],
+  },
+  {
+    title: "Keuangan",
+    items: [NAV_ITEMS[3], NAV_ITEMS[5]],
+  },
+  {
+    title: "Sistem",
+    items: [NAV_ITEMS[6]],
+  },
+];
+
 export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   currentPath?: string;
   activeBusinessName?: string;
@@ -56,7 +80,7 @@ export function Sidebar({
         <div
           role="presentation"
           onClick={onCloseMobile}
-          className="fixed inset-0 bg-[#25232B]/50 backdrop-blur-xs z-40 lg:hidden"
+          className="fixed inset-0 bg-[#1A1820]/40 backdrop-blur-xs z-40 lg:hidden"
           aria-hidden="true"
         />
       )}
@@ -65,99 +89,107 @@ export function Sidebar({
       <aside
         aria-label="Sidebar Navigasi"
         className={cn(
-          "fixed top-0 bottom-0 left-0 w-64 bg-white border-r border-[#E7E3EC] flex flex-col z-40 transition-transform duration-200 ease-in-out lg:translate-x-0",
+          "fixed top-0 bottom-0 left-0 w-64 bg-[#FFFFFF] border-r border-[#E5E1EC] flex flex-col z-40 transition-transform duration-200 ease-in-out lg:translate-x-0 shadow-xs",
           isOpenMobile ? "translate-x-0" : "-translate-x-full",
           className
         )}
         {...props}
       >
         {/* Brand Header */}
-        <div className="h-16 px-5 border-b border-[#E7E3EC] flex items-center justify-between shrink-0">
+        <div className="h-16 px-5 border-b border-[#E5E1EC] flex items-center justify-between shrink-0 bg-white">
           <Link
             href="/dashboard"
-            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3CC4] rounded-md"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3CC4] rounded-lg"
           >
             <BrandLogo size="md" showTagline tagline="Manajemen UMKM" />
           </Link>
+          <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-[#F4F0FD] text-[#5B3CC4] border border-[#E7E0FA]">
+            Retail
+          </span>
         </div>
 
-        {/* Business Context Slot */}
-        <div className="p-3 border-b border-[#F0EDF5] bg-[#FAF9F6]">
+        {/* Business Context Switcher */}
+        <div className="p-3 border-b border-[#E5E1EC] bg-[#FAF9F6]">
           <button
             type="button"
             onClick={onBusinessSwitchClick}
             aria-label="Pilih atau ganti bisnis aktif"
-            className="w-full flex items-center justify-between p-2 rounded-lg border border-[#E7E3EC] bg-white hover:bg-[#F6F3FF] hover:border-[#5B3CC4] transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3CC4] min-h-[44px]"
+            className="w-full flex items-center justify-between p-2.5 rounded-xl border border-[#E5E1EC] bg-white hover:bg-[#FBF9FD] hover:border-[#5B3CC4]/40 transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3CC4] min-h-[44px] shadow-2xs group"
           >
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-md bg-[#F6F3FF] border border-[#EAE4FF] text-[#5B3CC4] flex items-center justify-center shrink-0">
-                <Store className="w-4 h-4" aria-hidden="true" />
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#F4F0FD] to-[#EAE4FF] border border-[#DDD5F5] text-[#5B3CC4] flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs">
+                {activeBusinessName.charAt(0).toUpperCase() || <Store className="w-4 h-4" aria-hidden="true" />}
               </div>
-              <div className="truncate">
-                <div className="text-xs font-bold text-[#25232B] truncate leading-tight">
+              <div className="truncate min-w-0">
+                <div className="text-xs font-bold text-[#1A1820] truncate leading-tight group-hover:text-[#5B3CC4] transition-colors">
                   {activeBusinessName}
                 </div>
-                {businessCategory ? (
-                  <div className="text-[10px] text-[#716D7A] truncate leading-tight">
-                    {businessCategory}
-                  </div>
-                ) : (
-                  <div className="text-[10px] text-[#5B3CC4] font-medium leading-tight">
-                    Bisnis Aktif
-                  </div>
-                )}
+                <div className="text-[10px] text-[#767182] truncate leading-tight mt-0.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0D894F]" aria-hidden="true" />
+                  <span>{businessCategory || "Bisnis Aktif"}</span>
+                </div>
               </div>
             </div>
-            <ChevronDown className="w-4 h-4 text-[#716D7A] shrink-0 ml-1" aria-hidden="true" />
+            <ChevronDown className="w-4 h-4 text-[#9C97A8] shrink-0 ml-1 group-hover:text-[#5B3CC4] transition-colors" aria-hidden="true" />
           </button>
         </div>
 
-        {/* Navigation Menu */}
+        {/* Grouped Navigation Menu */}
         <nav
           aria-label="Navigasi Utama"
-          className="flex-1 overflow-y-auto px-3 py-4 space-y-1"
+          className="flex-1 overflow-y-auto px-3 py-3 space-y-4"
         >
-          {NAV_ITEMS.map((item) => {
-            const Icon = item.icon;
-            const isActive =
-              currentPath === item.href ||
-              (item.href !== "/dashboard" && currentPath.startsWith(item.href));
+          {NAV_GROUPS.map((group) => (
+            <div key={group.title} className="space-y-1">
+              <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#9C97A8] select-none">
+                {group.title}
+              </div>
+              <div className="space-y-0.5">
+                {group.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive =
+                    currentPath === item.href ||
+                    (item.href !== "/dashboard" && currentPath.startsWith(item.href));
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                className={cn(
-                  "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors min-h-[44px] select-none",
-                  isActive
-                    ? "bg-[#F6F3FF] text-[#5B3CC4] font-semibold"
-                    : "text-[#25232B] hover:bg-[#F6F3FF] hover:text-[#5B3CC4]"
-                )}
-              >
-                {isActive && (
-                  <span
-                    className="absolute left-0 top-2 bottom-2 w-[3px] bg-[#5B3CC4] rounded-r"
-                    aria-hidden="true"
-                  />
-                )}
-                <Icon
-                  className={cn(
-                    "w-5 h-5 shrink-0 transition-colors",
-                    isActive ? "text-[#5B3CC4]" : "text-[#716D7A]"
-                  )}
-                  aria-hidden="true"
-                />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-150 min-h-[40px] select-none",
+                        isActive
+                          ? "bg-[#F3F0FC] text-[#5B3CC4] font-semibold border-l-[3px] border-[#5B3CC4] pl-2.5 shadow-2xs"
+                          : "text-[#4A4654] hover:bg-[#F8F7FA] hover:text-[#1A1820]"
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          "w-4.5 h-4.5 shrink-0 transition-colors stroke-[1.75]",
+                          isActive ? "text-[#5B3CC4]" : "text-[#767182]"
+                        )}
+                        aria-hidden="true"
+                      />
+                      <span className="truncate flex-1">{item.label}</span>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5B3CC4]" aria-hidden="true" />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-4 border-t border-[#E7E3EC] bg-[#FAF9F6] text-xs text-[#716D7A] flex items-center justify-between">
-          <span className="font-medium">VeyraOS v1.0</span>
-          <span className="text-[10px] bg-[#EAE4FF] text-[#5B3CC4] font-bold px-2 py-0.5 rounded-full">
+        <div className="p-3.5 border-t border-[#E5E1EC] bg-[#FAF9F6] text-xs text-[#767182] flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#0D894F]" aria-hidden="true" />
+            <span className="font-semibold text-[#1A1820]">VeyraOS</span>
+            <span className="text-[11px] text-[#9C97A8]">v1.0</span>
+          </div>
+          <span className="text-[10px] bg-[#EAE4FF] text-[#5B3CC4] font-bold px-2 py-0.5 rounded-md border border-[#D5C8FF]">
             IDR · WIB
           </span>
         </div>

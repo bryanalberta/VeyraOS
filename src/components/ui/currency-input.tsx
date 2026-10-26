@@ -283,7 +283,7 @@ export const CurrencyInput = React.forwardRef<HTMLInputElement, CurrencyInputPro
             aria-invalid={errorMessage ? "true" : undefined}
             aria-describedby={describedBy || undefined}
             className={cn(
-              "w-full rounded-md border border-[#E7E3EC] bg-white py-2 text-sm font-semibold text-[#25232B] placeholder:text-[#716D7A] transition-colors focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[rgba(91,60,196,0.28)] disabled:cursor-not-allowed disabled:bg-[#F0EDF5] disabled:opacity-75 min-h-[44px] sm:min-h-[40px] font-mono tabular-nums",
+              "w-full rounded-lg sm:rounded-xl border border-[#E7E3EC] bg-white py-2 text-sm font-semibold text-[#25232B] placeholder:text-[#9A95A2] transition-all duration-150 focus:border-[#5B3CC4] focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[rgba(91,60,196,0.20)] disabled:cursor-not-allowed disabled:bg-[#F0EDF5] disabled:opacity-75 min-h-[44px] sm:min-h-[40px] font-mono tabular-nums shadow-2xs",
               !hidePrefix ? "pl-9 pr-3" : "px-3",
               errorMessage
                 ? "border-[#C0392B] focus-visible:border-[#C0392B] focus-visible:ring-[rgba(192,57,43,0.28)]"

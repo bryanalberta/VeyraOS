@@ -16,6 +16,12 @@ import {
   Clock,
   ArrowUpRight,
   Store,
+  ShoppingCart,
+  ArrowUpCircle,
+  ArrowDownCircle,
+  FileText,
+  Banknote,
+  Building2,
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/app-layout";
 import {
@@ -603,21 +609,87 @@ export function DashboardContent({
         {!isLoading && !loadError && summaryData && !isBusinessEmpty && (
           <>
             {/* -------------------------------------------------------------- */}
-            {/* 6 Kartu KPI Finansial Utama */}
+            {/* Quick Actions Bar (Aksi Cepat Kasir & Operasional Toko) */}
+            {/* -------------------------------------------------------------- */}
+            <div className="flex items-center gap-2.5 overflow-x-auto pb-1 select-none">
+              <Link href="/sales/new">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="h-9 px-3.5 text-xs font-semibold gap-1.5 shadow-xs"
+                  id="dash-quick-pos-btn"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Buka Kasir POS</span>
+                </Button>
+              </Link>
+              <Link href="/purchases/new">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-9 px-3.5 text-xs font-semibold gap-1.5 bg-white border-[#E5E1EC] hover:bg-[#F8F7FA] text-[#1A1820] shadow-xs"
+                  id="dash-quick-purchase-btn"
+                >
+                  <ArrowUpCircle className="w-3.5 h-3.5 text-[#5B3CC4]" aria-hidden="true" />
+                  <span>+ Beli Stok Baru</span>
+                </Button>
+              </Link>
+              <Link href="/expenses">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-9 px-3.5 text-xs font-semibold gap-1.5 bg-white border-[#E5E1EC] hover:bg-[#F8F7FA] text-[#1A1820] shadow-xs"
+                  id="dash-quick-expense-btn"
+                >
+                  <ArrowDownCircle className="w-3.5 h-3.5 text-[#B25E09]" aria-hidden="true" />
+                  <span>Catat Beban Kas</span>
+                </Button>
+              </Link>
+              <Link href="/reports">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-9 px-3.5 text-xs font-semibold gap-1.5 bg-white border-[#E5E1EC] hover:bg-[#F8F7FA] text-[#767182] shadow-xs"
+                  id="dash-quick-report-btn"
+                >
+                  <FileText className="w-3.5 h-3.5 text-[#767182]" aria-hidden="true" />
+                  <span>Laporan Finansial</span>
+                </Button>
+              </Link>
+            </div>
+
+            {/* -------------------------------------------------------------- */}
+            {/* 6 Kartu KPI Finansial Utama dengan Hirarki Asimetris */}
             {/* -------------------------------------------------------------- */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {/* 1. Penjualan Bersih */}
-              <StatCard
-                title="Penjualan Bersih (Net Sales)"
-                value={
-                  <span data-testid="kpi-net-sales">
-                    {formatRupiah(summaryData.netSales)}
-                  </span>
-                }
-                isFinancial
-                icon={<TrendingUp className="w-4 h-4 text-[#5B3CC4]" />}
-                subtitle={`Omzet kotor ${formatRupiah(summaryData.grossSales)} (diskon ${formatRupiah(summaryData.totalDiscounts)})`}
-              />
+              {/* 1. Penjualan Bersih (Hero Metric Card) */}
+              <div className="sm:col-span-2 lg:col-span-1 rounded-2xl border border-[#DDD5F5] bg-gradient-to-br from-white via-white to-[#F9F7FE] p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#5B3CC4] bg-[#F4F0FD] px-2 py-0.5 rounded-md border border-[#E7E0FA]">
+                      Performa Utama
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#767182] tracking-normal">
+                      Penjualan Bersih (Net Sales)
+                    </span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-[#F4F0FD] text-[#5B3CC4] border border-[#E7E0FA] shrink-0 flex items-center justify-center shadow-2xs">
+                    <TrendingUp className="w-4.5 h-4.5 stroke-[1.75]" />
+                  </div>
+                </div>
+
+                <div className="my-2">
+                  <div className="text-2xl sm:text-3xl font-bold text-[#1A1820] font-mono tabular-nums tracking-tight">
+                    <span data-testid="kpi-net-sales">
+                      {formatRupiah(summaryData.netSales)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-2 text-xs text-[#767182] border-t border-[#F0ECF8] pt-2.5 leading-relaxed">
+                  Omzet kotor {formatRupiah(summaryData.grossSales)} (diskon {formatRupiah(summaryData.totalDiscounts)})
+                </div>
+              </div>
 
               {/* 2. Harga Pokok Penjualan (HPP / COGS) */}
               <StatCard
@@ -628,7 +700,7 @@ export function DashboardContent({
                   </span>
                 }
                 isFinancial
-                icon={<Boxes className="w-4 h-4 text-[#25232B]" />}
+                icon={<Boxes className="w-4 h-4 text-[#1A1820]" />}
                 subtitle="Modal historis dari seluruh produk yang terjual"
               />
 
@@ -637,7 +709,7 @@ export function DashboardContent({
                 title="Laba Kotor (Gross Profit)"
                 value={
                   <div className="flex items-baseline justify-between gap-2">
-                    <span className="text-[#0E6251]" data-testid="kpi-gross-profit">
+                    <span className="text-[#0D894F]" data-testid="kpi-gross-profit">
                       {formatRupiah(summaryData.grossProfit)}
                     </span>
                     <Badge variant={summaryData.grossProfit >= 0 ? "success" : "danger"} className="text-[10px] tabular-nums">
@@ -646,7 +718,7 @@ export function DashboardContent({
                   </div>
                 }
                 isFinancial
-                icon={<Coins className="w-4 h-4 text-[#0E6251]" />}
+                icon={<Coins className="w-4 h-4 text-[#0D894F]" />}
                 subtitle="Penjualan bersih dikurangi total HPP"
               />
 
@@ -654,12 +726,12 @@ export function DashboardContent({
               <StatCard
                 title="Beban Operasional"
                 value={
-                  <span className="text-[#7D6608]" data-testid="kpi-operating-expenses">
+                  <span className="text-[#B25E09]" data-testid="kpi-operating-expenses">
                     {formatRupiah(summaryData.operatingExpenses)}
                   </span>
                 }
                 isFinancial
-                icon={<Receipt className="w-4 h-4 text-[#7D6608]" />}
+                icon={<Receipt className="w-4 h-4 text-[#B25E09]" />}
                 subtitle="Biaya sewa, utilitas listrik/air, gaji, & operasional"
               />
 
@@ -668,14 +740,14 @@ export function DashboardContent({
                 title="Laba Operasional Sederhana"
                 value={
                   <span
-                    className={summaryData.operatingProfit >= 0 ? "text-[#392477]" : "text-[#922B21]"}
+                    className={summaryData.operatingProfit >= 0 ? "text-[#5B3CC4]" : "text-[#C0392B]"}
                     data-testid="kpi-operating-profit"
                   >
                     {formatRupiah(summaryData.operatingProfit)}
                   </span>
                 }
                 isFinancial
-                icon={<CheckCircle2 className="w-4 h-4 text-[#392477]" />}
+                icon={<CheckCircle2 className="w-4 h-4 text-[#5B3CC4]" />}
                 subtitle="Laba kotor dikurangi seluruh beban operasional"
               />
 
@@ -684,7 +756,7 @@ export function DashboardContent({
                 title="Arus Kas Bersih (Cash Flow)"
                 value={
                   <span
-                    className={summaryData.recordedCashFlow.netCashFlow >= 0 ? "text-[#0E6251]" : "text-[#922B21]"}
+                    className={summaryData.recordedCashFlow.netCashFlow >= 0 ? "text-[#0D894F]" : "text-[#C0392B]"}
                     data-testid="kpi-net-cash-flow"
                   >
                     {summaryData.recordedCashFlow.netCashFlow >= 0 ? "+" : ""}
@@ -692,7 +764,7 @@ export function DashboardContent({
                   </span>
                 }
                 isFinancial
-                icon={<Wallet className="w-4 h-4 text-[#25232B]" />}
+                icon={<Wallet className="w-4 h-4 text-[#1A1820]" />}
                 subtitle={`Masuk: ${formatRupiah(summaryData.recordedCashFlow.cashInflows)} · Keluar: ${formatRupiah(summaryData.recordedCashFlow.cashOutflows)}`}
               />
             </div>

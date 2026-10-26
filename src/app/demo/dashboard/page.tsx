@@ -17,6 +17,12 @@ import {
   MapPin,
   Phone,
   Sparkles,
+  ShoppingCart,
+  ArrowUpCircle,
+  ArrowDownCircle,
+  FileText,
+  Banknote,
+  Building2,
 } from "lucide-react";
 import { DemoLayout } from "@/components/demo/demo-layout";
 import {
@@ -356,7 +362,7 @@ export default function DemoDashboardPage() {
             </div>
 
             <div className="flex items-center gap-3 mt-1.5 text-xs text-[#716D7A] flex-wrap">
-              <span className="flex items-center gap-1 font-semibold text-[#25232B]">
+              <span className="flex items-center gap-1 font-semibold text-[#25232B]" suppressHydrationWarning>
                 <Store className="w-3.5 h-3.5 text-[#5B3CC4]" />
                 {business.name}
               </span>
@@ -420,14 +426,64 @@ export default function DemoDashboardPage() {
         </div>
 
         {/* ------------------------------------------------------------------ */}
+        {/* Quick Actions Bar (Aksi Cepat Operasional Simulasi) */}
+        {/* ------------------------------------------------------------------ */}
+        <div className="flex items-center gap-2.5 overflow-x-auto pb-1 select-none">
+          <Link href="/demo/sales/new">
+            <Button
+              variant="primary"
+              size="sm"
+              className="h-9 px-3.5 text-xs font-semibold gap-1.5 shadow-xs"
+              id="demo-quick-pos-btn"
+            >
+              <ShoppingCart className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Buka Kasir POS</span>
+            </Button>
+          </Link>
+          <Link href="/demo/purchases">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-9 px-3.5 text-xs font-semibold gap-1.5 bg-white border-[#E5E1EC] hover:bg-[#F8F7FA] text-[#1A1820] shadow-xs"
+              id="demo-quick-purchase-btn"
+            >
+              <ArrowUpCircle className="w-3.5 h-3.5 text-[#5B3CC4]" aria-hidden="true" />
+              <span>Restock Produk</span>
+            </Button>
+          </Link>
+          <Link href="/demo/expenses">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-9 px-3.5 text-xs font-semibold gap-1.5 bg-white border-[#E5E1EC] hover:bg-[#F8F7FA] text-[#1A1820] shadow-xs"
+              id="demo-quick-expense-btn"
+            >
+              <ArrowDownCircle className="w-3.5 h-3.5 text-[#B25E09]" aria-hidden="true" />
+              <span>Catat Beban Kas</span>
+            </Button>
+          </Link>
+          <Link href="/demo/reports">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-9 px-3.5 text-xs font-semibold gap-1.5 bg-white border-[#E5E1EC] hover:bg-[#F8F7FA] text-[#767182] shadow-xs"
+              id="demo-quick-report-btn"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#767182]" aria-hidden="true" />
+              <span>Laporan Finansial</span>
+            </Button>
+          </Link>
+        </div>
+
+        {/* ------------------------------------------------------------------ */}
         {/* Banner Edukasi Disiplin Finansial UMKM */}
         {/* ------------------------------------------------------------------ */}
-        <div className="bg-[#FAF9F6] border border-[#EAE4FF] rounded-xl p-4 flex items-start gap-3 text-xs text-[#716D7A]">
-          <div className="w-6 h-6 rounded-lg bg-[#F6F3FF] text-[#5B3CC4] flex items-center justify-center shrink-0 mt-0.5 border border-[#EAE4FF]">
-            <Info className="w-4 h-4" />
+        <div className="bg-[#FAF9F6] border border-[#E5E1EC] rounded-xl p-3.5 flex items-start gap-3 text-xs text-[#767182]">
+          <div className="w-5 h-5 rounded-md bg-[#F4F0FD] text-[#5B3CC4] flex items-center justify-center shrink-0 mt-0.5 border border-[#E7E0FA]">
+            <Info className="w-3.5 h-3.5" />
           </div>
           <div className="space-y-0.5">
-            <p className="font-semibold text-[#25232B]">
+            <p className="font-semibold text-[#1A1820]">
               Prinsip Akuntansi UMKM Disiplin (Anti-Double-Count)
             </p>
             <p className="leading-relaxed">
@@ -439,21 +495,37 @@ export default function DemoDashboardPage() {
         </div>
 
         {/* ------------------------------------------------------------------ */}
-        {/* 6 Kartu KPI Finansial Utama */}
+        {/* 6 Kartu KPI Finansial Utama dengan Hirarki Asimetris */}
         {/* ------------------------------------------------------------------ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* 1. Penjualan Bersih */}
-          <StatCard
-            title="Penjualan Bersih (Net Sales)"
-            value={
-              <span data-testid="demo-kpi-net-sales">
-                {formatRupiah(summaryData.netSales)}
-              </span>
-            }
-            isFinancial
-            icon={<TrendingUp className="w-4 h-4 text-[#5B3CC4]" />}
-            subtitle={`Omzet kotor ${formatRupiah(summaryData.grossSales)} (diskon ${formatRupiah(summaryData.totalDiscounts)})`}
-          />
+          {/* 1. Penjualan Bersih (Hero Metric Card) */}
+          <div className="sm:col-span-2 lg:col-span-1 rounded-2xl border border-[#DDD5F5] bg-gradient-to-br from-white via-white to-[#F9F7FE] p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
+            <div className="flex items-center justify-between gap-3 mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#5B3CC4] bg-[#F4F0FD] px-2 py-0.5 rounded-md border border-[#E7E0FA]">
+                  Performa Utama
+                </span>
+                <span className="text-xs sm:text-sm font-semibold text-[#767182] tracking-normal">
+                  Penjualan Bersih (Net Sales)
+                </span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-[#F4F0FD] text-[#5B3CC4] border border-[#E7E0FA] shrink-0 flex items-center justify-center shadow-2xs">
+                <TrendingUp className="w-4.5 h-4.5 stroke-[1.75]" />
+              </div>
+            </div>
+
+            <div className="my-2">
+              <div className="text-2xl sm:text-3xl font-bold text-[#1A1820] font-mono tabular-nums tracking-tight">
+                <span data-testid="demo-kpi-net-sales">
+                  {formatRupiah(summaryData.netSales)}
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-2 text-xs text-[#767182] border-t border-[#F0ECF8] pt-2.5 leading-relaxed">
+              Omzet kotor {formatRupiah(summaryData.grossSales)} (diskon {formatRupiah(summaryData.totalDiscounts)})
+            </div>
+          </div>
 
           {/* 2. Harga Pokok Penjualan (HPP / COGS) */}
           <StatCard
@@ -464,7 +536,7 @@ export default function DemoDashboardPage() {
               </span>
             }
             isFinancial
-            icon={<Boxes className="w-4 h-4 text-[#25232B]" />}
+            icon={<Boxes className="w-4 h-4 text-[#1A1820]" />}
             subtitle="Modal produk terjual dari transaksi lunas"
           />
 
@@ -473,7 +545,7 @@ export default function DemoDashboardPage() {
             title="Laba Kotor (Gross Profit)"
             value={
               <div className="flex items-baseline justify-between gap-2">
-                <span className="text-[#0E6251]" data-testid="demo-kpi-gross-profit">
+                <span className="text-[#0D894F]" data-testid="demo-kpi-gross-profit">
                   {formatRupiah(summaryData.grossProfit)}
                 </span>
                 <Badge
@@ -485,7 +557,7 @@ export default function DemoDashboardPage() {
               </div>
             }
             isFinancial
-            icon={<Coins className="w-4 h-4 text-[#0E6251]" />}
+            icon={<Coins className="w-4 h-4 text-[#0D894F]" />}
             subtitle="Penjualan bersih dikurangi total HPP"
           />
 
@@ -493,12 +565,12 @@ export default function DemoDashboardPage() {
           <StatCard
             title="Beban Operasional"
             value={
-              <span className="text-[#7D6608]" data-testid="demo-kpi-operating-expenses">
+              <span className="text-[#B25E09]" data-testid="demo-kpi-operating-expenses">
                 {formatRupiah(summaryData.operatingExpenses)}
               </span>
             }
             isFinancial
-            icon={<Receipt className="w-4 h-4 text-[#7D6608]" />}
+            icon={<Receipt className="w-4 h-4 text-[#B25E09]" />}
             subtitle="Listrik, ATK, gaji kasir, perbaikan, & operasional"
           />
 
@@ -507,14 +579,14 @@ export default function DemoDashboardPage() {
             title="Laba Operasional Sederhana"
             value={
               <span
-                className={summaryData.operatingProfit >= 0 ? "text-[#392477]" : "text-[#922B21]"}
+                className={summaryData.operatingProfit >= 0 ? "text-[#5B3CC4]" : "text-[#C0392B]"}
                 data-testid="demo-kpi-operating-profit"
               >
                 {formatRupiah(summaryData.operatingProfit)}
               </span>
             }
             isFinancial
-            icon={<CheckCircle2 className="w-4 h-4 text-[#392477]" />}
+            icon={<CheckCircle2 className="w-4 h-4 text-[#5B3CC4]" />}
             subtitle="Laba kotor dikurangi seluruh beban operasional"
           />
 
@@ -523,7 +595,7 @@ export default function DemoDashboardPage() {
             title="Arus Kas Bersih (Cash Flow)"
             value={
               <span
-                className={summaryData.recordedCashFlow.netCashFlow >= 0 ? "text-[#0E6251]" : "text-[#922B21]"}
+                className={summaryData.recordedCashFlow.netCashFlow >= 0 ? "text-[#0D894F]" : "text-[#C0392B]"}
                 data-testid="demo-kpi-net-cash-flow"
               >
                 {summaryData.recordedCashFlow.netCashFlow >= 0 ? "+" : ""}
@@ -531,7 +603,7 @@ export default function DemoDashboardPage() {
               </span>
             }
             isFinancial
-            icon={<Wallet className="w-4 h-4 text-[#25232B]" />}
+            icon={<Wallet className="w-4 h-4 text-[#1A1820]" />}
             subtitle={`Masuk: ${formatRupiah(summaryData.recordedCashFlow.cashInflows)} · Keluar: ${formatRupiah(summaryData.recordedCashFlow.cashOutflows)}`}
           />
         </div>

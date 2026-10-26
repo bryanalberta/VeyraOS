@@ -107,5 +107,61 @@
   - [x] Integritas bundle Next.js 16 & status environment variable rahasia
   - [x] Laporan resmi: `docs/stage-10-comprehensive-qa-and-security-report.md`
 
+---
+
+## Phase 11: Comprehensive Premium UI/UX Redesign (UI/UX Pro Max)
+
+- [x] **Step 0: Hydration Issue Fix & Baseline Capture**
+  - [x] Perbaiki Next.js hydration error pada `RootLayout` (`suppressHydrationWarning` pada `<html lang="id">`)
+  - [x] Buat backup branch `backup/pre-premium-redesign` untuk mekanisme rollback aman
+  - [x] Jalankan query design intelligence `search.py` dari `ui-ux-pro-max` (Swiss Style + Minimalist FinTech)
+  - [x] Ambil baseline BEFORE screenshots via Playwright (Desktop 1440px & Mobile 390px pada Dashboard dan POS)
+
+- [ ] **Step 1: Design System & Shared Primitives Transformation**
+  - [ ] Standardisasi typography tokens scale (`display`, `h1`, `h2`, `subhead`, `body`, `caption-overline`, `financial-mono`)
+  - [ ] Standardisasi icon tokens & Lucide stroke consistency (`strokeWidth={1.75}`)
+  - [ ] Upgrade `Button`: tactile press feedback, micro-depth, refined variant system (primary, secondary, subtle, outline, destructive)
+  - [ ] Upgrade `Card`: layered architectural cards, crisp hairline borders (`#E5E1EC`), deliberate padding, elevation levels
+  - [ ] Upgrade `Badge`: semantic statuses (success, warning, critical, neutral, live) dengan dot indicator dan contrast AA
+  - [ ] Upgrade `Input` & `Select`: crisp focus states, unified input heights, integrated icon prefixes
+
+- [ ] **Step 2: Shared Layout, Sidebar & Navbar Redesign**
+  - [ ] **Sidebar**:
+    - Struktur proporsi baru dengan grouping navigasi (`UTAMA`, `OPERASIONAL`, `FINANSIAL`, `SISTEM`)
+    - Redesign business context switcher dengan status badge dan avatar toko bertekstur
+    - Nav items dengan active pill elegan (bukan sekadar glow bar), hover tint halus, dan badge notifikasi/status
+    - Footer sidebar terstruktur dengan status koneksi, versi, dan indikator multi-tenant
+  - [ ] **TopBar / Navbar**:
+    - Breadcrumbs kontekstual terintegrasi (`Ringkasan / Dashboard Performa`)
+    - Quick Action command trigger / search bar
+    - Profile pill dengan tenant switcher dan notification hub
+    - Responsive mobile layout dengan transisi drawer mulus
+  - [ ] **Mobile Bottom Navigation**:
+    - Floating docked bottom bar dengan label micro-typography dan tactile tab switching
+
+- [ ] **Step 3: Redesign Dashboard Finansial (`/dashboard` & `/demo/dashboard`)**
+  - [ ] Hero metric banner vs secondary metrics (asymmetric visual hierarchy)
+  - [ ] Quick Action Bar (Buka Kasir POS, Restock Barang, Catat Beban, Unduh Laporan)
+  - [ ] Redesign SVG Sales Trend Chart dengan baseline horizontal, target bar, dan tooltip finansial
+  - [ ] Recent transactions stream dengan status badge rapi, icon pembayaran visual, dan row action
+  - [ ] Inventory health alert widget (stok habis & menipis) dengan restock trigger instan
+
+- [ ] **Step 4: Redesign POS Kasir (`/sales/new` & `/demo/sales/new`)**
+  - [ ] Split screen 7:5 / 8:4 desktop layout dengan visual balance yang kokoh
+  - [ ] Category filter pills dengan icon dan item counter
+  - [ ] Product tiles dengan visual status stok (tersedia, menipis, habis), harga terformat tebal, dan quick add button
+  - [ ] Cart drawer dengan item list berjenjang, quantity stepper modern (`- 1 +`), diskon per item, quick cash presets (`Uang Pas`, `Rp 50.000`, `Rp 100.000`), dan tombol bayar utama yang commanding
+
+- [ ] **Step 5: Propagasi ke Seluruh Modul (Products, Purchases, Expenses, Reports, Settings)**
+  - [ ] Selaraskan filter bar, tabel, modal dialog, dan kartu di modul Produk, Pembelian, Pengeluaran, Laporan, dan Pengaturan
+
+- [ ] **Step 6: Validasi Menyeluruh, Bukti Screenshot AFTER, dan Dokumentasi**
+  - [ ] Ambil screenshot AFTER via Playwright pada Desktop 1440px dan Mobile 390px
+  - [ ] Bandingkan visual before vs after secara objektif
+  - [ ] Jalankan Vitest (`npm test` / `npx vitest run`, 100% PASS)
+  - [ ] Jalankan TypeScript check (`tsc --noEmit`, 0 errors)
+  - [ ] Jalankan ESLint (`npm run lint`, 0 errors)
+
+
 
 

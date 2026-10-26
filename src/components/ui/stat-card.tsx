@@ -44,9 +44,10 @@ export function StatCard({
   const isInteractive = Boolean(onClick);
 
   const sharedCardClasses = cn(
-    "w-full rounded-2xl border border-[#E7E3EC] bg-white p-5 sm:p-6 shadow-sm transition-all text-left select-none",
-    isInteractive &&
-      "cursor-pointer hover:border-[#5B3CC4]/50 hover:shadow-md focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[rgba(91,60,196,0.28)] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
+    "w-full rounded-2xl border border-[#E7E3EC] bg-white p-5 sm:p-6 shadow-sm transition-all duration-200 text-left select-none",
+    isInteractive
+      ? "cursor-pointer hover:border-[#5B3CC4]/50 hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[rgba(91,60,196,0.28)] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
+      : "hover:border-[#D5CFDF]",
     className
   );
 
@@ -59,7 +60,7 @@ export function StatCard({
         </span>
         {icon && (
           <div
-            className="p-2 sm:p-2.5 rounded-xl bg-[#EAE4FF] text-[#5B3CC4] shrink-0 flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl bg-[#EAE4FF] bg-gradient-to-br from-[#F6F3FF] to-[#EAE4FF] text-[#5B3CC4] border border-[#E0D7FE] shrink-0 flex items-center justify-center shadow-2xs"
             aria-hidden="true"
           >
             {icon}

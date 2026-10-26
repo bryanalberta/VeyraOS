@@ -66,8 +66,12 @@ export default function DemoExpensesPage() {
   const [category, setCategory] = React.useState(DEMO_EXPENSE_CATEGORIES[0]);
   const [amount, setAmount] = React.useState<number>(100000);
   const [description, setDescription] = React.useState("");
-  const [expenseDate, setExpenseDate] = React.useState(() => new Date().toISOString().slice(0, 10));
+  const [expenseDate, setExpenseDate] = React.useState("");
   const [modalError, setModalError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    setExpenseDate(new Date().toISOString().slice(0, 10));
+  }, []);
 
   // Toast Notice
   const [notice, setNotice] = React.useState<{ type: "success" | "error"; message: string } | null>(null);

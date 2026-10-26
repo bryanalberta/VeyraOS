@@ -272,7 +272,7 @@ export function ProductListContent({
                 id="product-category-select"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full rounded-md border border-[#E7E3EC] bg-white px-3 py-2 text-sm text-[#25232B] transition-colors focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[rgba(91,60,196,0.28)] min-h-[44px] sm:min-h-[40px] appearance-none"
+                className="w-full rounded-xl border border-[#E7E3EC] bg-white px-3.5 py-2 text-sm text-[#25232B] transition-all duration-150 focus:border-[#5B3CC4] focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[rgba(91,60,196,0.20)] min-h-[44px] sm:min-h-[40px] appearance-none pr-9 shadow-2xs cursor-pointer"
               >
                 <option value="ALL">Semua Kategori</option>
                 {categories.map((cat) => (

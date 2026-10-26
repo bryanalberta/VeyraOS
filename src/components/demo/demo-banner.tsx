@@ -70,20 +70,17 @@ export function DemoBanner() {
       <header
         role="region"
         aria-label="Banner Penanda Mode Demo"
-        className="sticky top-0 z-40 w-full bg-[#392477] text-white border-b border-[#251554] shadow-xs"
+        className="relative z-30 w-full bg-[#1F1538] text-white border-b border-[#2F2154] shadow-xs"
       >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-2.5 sm:py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
           {/* Lencana & Deskripsi Status Simulasi */}
           <div className="flex items-center gap-2.5 min-w-0">
-            <Badge
-              variant="demo"
-              className="shrink-0 text-[10px] tracking-wider py-0.5 px-2 bg-[#FFD54F] text-[#25232B] font-bold border-[#FBC02D]"
-            >
+            <span className="shrink-0 text-[10px] tracking-wider py-0.5 px-2 bg-[#FFD54F] text-[#1A1820] font-bold rounded-md uppercase border border-[#FBC02D] select-none">
               MODE DEMO — SIMULASI
-            </Badge>
+            </span>
             <p className="text-xs text-white/90 truncate leading-snug">
               <span className="font-semibold text-white">Toko Sembako Sejahtera.</span>{" "}
-              <span className="hidden sm:inline text-white/80">
+              <span className="hidden sm:inline text-white/70">
                 Data disimpan lokal di peramban Anda dan terisolasi dari database produksi.
               </span>
             </p>
